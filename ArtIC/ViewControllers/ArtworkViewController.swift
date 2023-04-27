@@ -1,12 +1,6 @@
 
 import UIKit
 
-//enum URLExamples2: String {
-//    //case1
-//    case imageURL = "https://www.artic.edu/iiif/2/e966799b-97ee-1cc6-bd2f-a94b4b8bb8f9/full/843,/0/default.jpg"
-//    case infoURL = "https://api.artic.edu/api/v1/artworks/129884?fields=title,date_display,artist_title,artwork_type_title"
-//}
-
 enum URLExamples {
     case starryNightandtheAstronauts
     case parisStreetRainyDay
@@ -48,7 +42,6 @@ enum URLExamples {
 
 class ArtworkViewController: UIViewController {
     
-    
     // MARK: - СЮЖЕТЫ
     let example1 = URLExamples.starryNightandtheAstronauts
     let example2 = URLExamples.parisStreetRainyDay
@@ -72,10 +65,11 @@ class ArtworkViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         activityTESTIndicator.startAnimating() //добавим запуск анимации
         activityTESTIndicator.hidesWhenStopped = true // добавим остановку анимации
         fetchImage() //подгрузим картинку
-        fetchInfo()
+        fetchInfo() //подгрузим данные
         
         // MARK: - Предустановки
         titleLabel.text = ""
@@ -84,96 +78,27 @@ class ArtworkViewController: UIViewController {
         artworkTypeTitleLabel.text = ""
         nextArtworkButton.layer.cornerRadius = 15
         nextArtworkButton.tintColor = .gray
-        
     }
     
     // MARK: - load image func
     //добавим функцию подгрузки картинки
     func fetchImage() {
-        guard let url = URL(string:  currentURLExample.imageURL) else { return } //URLExamples2.imageURL.rawValue) else { return }
+        guard let url = URL(string:  currentURLExample.imageURL) else { return }
         
         //используем базовый фреймворк URLSession, к нему dataTask применяем вариант в котором есть completionHandler, потому что мы хотим получить данные
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error)
-                return
-            }
+        URLSession.shared.dataTask(with: url) { (data, _, _) in //пустые строки для 'response' и  'error'
             
-            if let response = response {
-                print(response)
-            }
-            
-            if let data = data, let image = UIImage(data: data) { //вдруг у нас запрос успешен, а данных нет?
-                DispatchQueue.main.async { //URLsession и UI данные изменяются на разных потоках (синхронно т.е когда задача завершится, а нам нужно сразу => поставим асинхронно) чтобы UI не заблокировался
-                    self.imageTESTView.image = image
-                    self.activityTESTIndicator.stopAnimating() //остановим индикатор активити(загрузки)
-                }
-            }
-        }.resume() //если не поставить resume, запрос не запустится
-    }
-    
-    // MARK: - load info
-    
-    func fetchInfo() {
-        guard let url = URL(string: currentURLExample.infoURL) else { return }
-        // URLExamples2.infoURL.rawValue) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            guard let data = data else { return }
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let info = json["data"] as! [String: Any]
-                let title = info["title"] as? String
-                let dateDisplay = info["date_display"] as? String
-                let artworkTypeTitle = info["artwork_type_title"] as? String
-                let artistTitle = info["artist_title"] as? String
+            //На случай еслизахотим отработать 'response' и  'error'
+//      URLSession.shared.dataTask(with: url) { (data, response, error) in
+//                if let error = error {
+//                    print(error)
+//                    return
+//                }
+//
+//                if let response = response {
+//                    print(response)
+//                }
                 
-                DispatchQueue.main.async {
-                    self.titleLabel.text = title
-                    self.dateDisplayLabel.text = dateDisplay
-                    self.artworkTypeTitleLabel.text = artworkTypeTitle
-                    self.artistTitleLabel.text = artistTitle
-                    self.activityTESTIndicator.stopAnimating()
-                }
-                
-            } catch let error {
-                print(error)
-            }
-        }.resume()
-    }
-    
-    // MARK: - BUTTON
-    
-    @IBAction func nextArtworkButtonPressed(_ sender: Any) {
-        
-        switch currentURLExample {
-        case .starryNightandtheAstronauts:
-            currentURLExample = .parisStreetRainyDay
-        case .parisStreetRainyDay:
-            currentURLExample = .aSundayonLaGrandeJatte1884
-        case .aSundayonLaGrandeJatte1884:
-            currentURLExample = .womanatHerToilette
-        case .womanatHerToilette:
-            currentURLExample = .americanGothic
-        case .americanGothic:
-            currentURLExample = .starryNightandtheAstronauts
-        }
-        
-        // MARK: - load image func
-            guard let url = URL(string:  currentURLExample.imageURL) else { return } //URLExamples2.imageURL.rawValue) else { return }
-
-            //используем базовый фреймворк URLSession, к нему dataTask применяем вариант в котором есть completionHandler, потому что мы хотим получить данные
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-
-                if let response = response {
-                    print(response)
-                }
-
                 if let data = data, let image = UIImage(data: data) { //вдруг у нас запрос успешен, а данных нет?
                     DispatchQueue.main.async { //URLsession и UI данные изменяются на разных потоках (синхронно т.е когда задача завершится, а нам нужно сразу => поставим асинхронно) чтобы UI не заблокировался
                         self.imageTESTView.image = image
@@ -181,15 +106,16 @@ class ArtworkViewController: UIViewController {
                     }
                 }
             }.resume() //если не поставить resume, запрос не запустится
-
+        }
+        
         // MARK: - load info
-
+        
+        func fetchInfo() {
             guard let url = URL(string: currentURLExample.infoURL) else { return }
-            // URLExamples2.infoURL.rawValue) else { return }
-
+            
             URLSession.shared.dataTask(with: url) { (data, _, _) in
                 guard let data = data else { return }
-
+                
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                     let info = json["data"] as! [String: Any]
@@ -197,7 +123,7 @@ class ArtworkViewController: UIViewController {
                     let dateDisplay = info["date_display"] as? String
                     let artworkTypeTitle = info["artwork_type_title"] as? String
                     let artistTitle = info["artist_title"] as? String
-
+                    
                     DispatchQueue.main.async {
                         self.titleLabel.text = title
                         self.dateDisplayLabel.text = dateDisplay
@@ -205,15 +131,32 @@ class ArtworkViewController: UIViewController {
                         self.artistTitleLabel.text = artistTitle
                         self.activityTESTIndicator.stopAnimating()
                     }
-
+                    
                 } catch let error {
                     print(error)
                 }
             }.resume()
+        }
         
+        // MARK: - BUTTON
         
-        
+        @IBAction func nextArtworkButtonPressed(_ sender: Any) {
+            
+            switch currentURLExample {
+            case .starryNightandtheAstronauts:
+                currentURLExample = .parisStreetRainyDay
+            case .parisStreetRainyDay:
+                currentURLExample = .aSundayonLaGrandeJatte1884
+            case .aSundayonLaGrandeJatte1884:
+                currentURLExample = .womanatHerToilette
+            case .womanatHerToilette:
+                currentURLExample = .americanGothic
+            case .americanGothic:
+                currentURLExample = .starryNightandtheAstronauts
+            }
+            
+            fetchImage() //подгрузим картинку
+            fetchInfo() //подгрузим данные
+            
+        }
     }
-    
-    
-}
