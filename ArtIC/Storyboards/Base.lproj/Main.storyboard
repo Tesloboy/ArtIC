@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gWS-pr-dRY">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Artwork View Controller-->
+        <scene sceneID="IOF-F3-C0O">
+            <objects>
+                <viewController id="gWS-pr-dRY" customClass="ArtworkViewController" customModule="ArtIC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iu7-Jq-Ca6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Xy-DX-2Kb" userLabel="imageTESTView">
+                                <rect key="frame" x="0.0" y="59" width="393" height="549"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aRS-LF-b0J" userLabel="activityTESTIndicator">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k8S-fV-oPZ">
+                                <rect key="frame" x="127.33333333333333" y="638" width="138.66666666666669" height="105.33333333333337"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uO8-5m-8bh" userLabel="titleLabel">
+                                        <rect key="frame" x="55.000000000000007" y="0.0" width="28.666666666666664" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date_display" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvK-Iw-2yg">
+                                        <rect key="frame" x="21.333333333333329" y="28.333333333333371" width="96" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artwork_type_title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2B-Ku-cYj">
+                                        <rect key="frame" x="0.0" y="56.666666666666636" width="138.66666666666666" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist_title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLd-ib-nSJ">
+                                        <rect key="frame" x="30.666666666666671" y="85" width="77" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVI-pg-xh3">
+                                <rect key="frame" x="137" y="768.66666666666663" width="119" height="34.333333333333371"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="next artwork"/>
+                                <connections>
+                                    <action selector="nextArtworkButtonPressed:" destination="gWS-pr-dRY" eventType="touchUpInside" id="mJN-dX-vc5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="r8f-aQ-qHQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aRS-LF-b0J" firstAttribute="centerY" secondItem="iu7-Jq-Ca6" secondAttribute="centerY" id="00J-HK-gFJ"/>
+                            <constraint firstItem="k8S-fV-oPZ" firstAttribute="top" secondItem="5Xy-DX-2Kb" secondAttribute="bottom" constant="30" id="7AY-h7-qA7"/>
+                            <constraint firstItem="k8S-fV-oPZ" firstAttribute="centerX" secondItem="iu7-Jq-Ca6" secondAttribute="centerX" id="7sj-mh-voh"/>
+                            <constraint firstItem="5Xy-DX-2Kb" firstAttribute="trailing" secondItem="r8f-aQ-qHQ" secondAttribute="trailing" id="Cec-gi-2s2"/>
+                            <constraint firstItem="5Xy-DX-2Kb" firstAttribute="leading" secondItem="r8f-aQ-qHQ" secondAttribute="leading" id="Sc8-Gi-4H9"/>
+                            <constraint firstItem="mVI-pg-xh3" firstAttribute="centerX" secondItem="iu7-Jq-Ca6" secondAttribute="centerX" id="brc-hC-JiW"/>
+                            <constraint firstItem="aRS-LF-b0J" firstAttribute="centerX" secondItem="iu7-Jq-Ca6" secondAttribute="centerX" id="ctY-YA-KdL"/>
+                            <constraint firstItem="r8f-aQ-qHQ" firstAttribute="bottom" secondItem="mVI-pg-xh3" secondAttribute="bottom" constant="15" id="kAR-SV-9ff"/>
+                            <constraint firstItem="5Xy-DX-2Kb" firstAttribute="top" secondItem="r8f-aQ-qHQ" secondAttribute="top" id="qQu-Af-JeE"/>
+                            <constraint firstItem="r8f-aQ-qHQ" firstAttribute="bottom" secondItem="5Xy-DX-2Kb" secondAttribute="bottom" constant="210" id="wG2-3X-5ks"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityTESTIndicator" destination="aRS-LF-b0J" id="Wms-Y5-eCn"/>
+                        <outlet property="artistTitleLabel" destination="nLd-ib-nSJ" id="V0n-Ok-oFb"/>
+                        <outlet property="artworkTypeTitleLabel" destination="W2B-Ku-cYj" id="f4F-nI-RjN"/>
+                        <outlet property="dateDisplayLabel" destination="dvK-Iw-2yg" id="DbB-nU-IMx"/>
+                        <outlet property="imageTESTView" destination="5Xy-DX-2Kb" id="bAF-nQ-w1I"/>
+                        <outlet property="nextArtworkButton" destination="mVI-pg-xh3" id="N6L-Yh-VMv"/>
+                        <outlet property="titleLabel" destination="uO8-5m-8bh" id="Y3b-NN-znu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aLN-Vc-qXz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922.90076335877859" y="-1495.0704225352113"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
